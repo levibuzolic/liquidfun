@@ -123,8 +123,8 @@ B2FRICTIONJOINT = \
 
 B2GEARJOINT = \
 	'_b2GearJoint_GetRatio', \
-	'_b2GearJointDef_Create', \
-	'_b2GearJointDef_InitializeAndCreate'
+	'_b2GearJointDef_Create' #, \
+	# '_b2GearJointDef_InitializeAndCreate'
 
 B2JOINT = \
 	'_b2Joint_GetBodyA', \
@@ -159,7 +159,8 @@ B2PARTICLESYSTEM = \
 	'_b2ParticleSystem_SetGravityScale', \
 	'_b2ParticleSystem_SetMaxParticleCount', \
 	'_b2ParticleSystem_SetParticleLifetime', \
-	'_b2ParticleSystem_SetRadius'
+	'_b2ParticleSystem_SetRadius', \
+	'_b2ParticleSystem_DestroyParticle'
 
 B2POLYGONSHAPE = \
 	'_b2PolygonShape_CreateFixture_3', \
@@ -225,7 +226,6 @@ B2WORLD = \
 	'_b2World_Step'
 
 EXPORTS = EXPORTED_FUNCTIONS="[ \
-	'_GenerateOffsets', \
 	$(B2BODY), \
 	$(B2CHAINSHAPE), \
 	$(B2CIRCLESHAPE), \
@@ -252,4 +252,4 @@ EXPORTS = EXPORTED_FUNCTIONS="[ \
 	]"
 
 bindings.js:
-	$(EMSCRIPTEN)/emcc -I../ -o lf_core.js jsBindings/jsBindings.cpp $(OBJECTS) -s $(EXPORTS) -s TOTAL_MEMORY=33554432 -O2 --js-library callbacks.js
+	$(EMSCRIPTEN)/emcc -I../ -o lf_core.js jsBindings/jsBindings.cpp $(OBJECTS) -s $(EXPORTS) -s TOTAL_MEMORY=33554432 -s EXTRA_EXPORTED_RUNTIME_METHODS=["cwrap"] -s WASM=0 -s ASSERTIONS=2 -O2 --js-library callbacks.js

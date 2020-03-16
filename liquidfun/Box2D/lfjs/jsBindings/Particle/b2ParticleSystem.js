@@ -64,6 +64,9 @@ var b2ParticleSystem_SetParticleLifetime =
 var b2ParticleSystem_SetRadius =
   Module.cwrap('b2ParticleSystem_SetRadius', 'null', ['number', 'number']);
 
+var b2ParticleSystem_DestroyParticle =
+  Module.cwrap('b2ParticleSystem_DestroyParticle', 'null', ['number', 'number']);
+
 /** @constructor */
 function b2ParticleSystem(ptr) {
   this.dampingStrength = 1.0;
@@ -146,4 +149,8 @@ b2ParticleSystem.prototype.SetParticleLifetime = function(index, lifetime) {
 b2ParticleSystem.prototype.SetRadius = function(radius) {
   this.radius = radius;
   b2ParticleSystem_SetRadius(this.ptr, radius);
+};
+
+b2ParticleSystem.prototype.DestroyParticle = function(index) {
+  b2ParticleSystem_DestroyParticle(this.ptr, index);
 };

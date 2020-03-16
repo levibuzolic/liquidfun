@@ -59,3 +59,7 @@ void b2ParticleSystem_SetParticleLifetime(void* particleSystem, double index, do
 void b2ParticleSystem_SetRadius(void* particleSystem, double radius) {
   ((b2ParticleSystem*)particleSystem)->SetRadius(radius);
 }
+
+void b2ParticleSystem_DestroyParticle(void* particleSystem, double index) {
+  ((b2ParticleSystem*)particleSystem)->DestroyParticle(index);
+}
